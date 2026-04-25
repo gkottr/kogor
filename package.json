@@ -1,0 +1,15 @@
+{
+  "name": "kogor",
+  "private": "true",
+  "version": "0.0.0",
+  "author": "gkottr",
+  "license": "MIT",
+  "workspaces": [
+    "babyficator",
+    "bastard"
+  ],
+  "scripts": {
+    "build": "npm run build -w babyficator",
+    "start": "npm run start -w bastard"
+  }
+}

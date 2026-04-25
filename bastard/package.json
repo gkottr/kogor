@@ -1,0 +1,16 @@
+{
+  "name": "bastard",
+  "version": "0.0.0",
+  "description": "",
+  "author": "gkottr",
+  "license": "MIT",
+  "type": "module",
+  "private": "true",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-http-proxy": "^2.1.2"
+  }
+}
