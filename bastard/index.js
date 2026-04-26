@@ -50,7 +50,6 @@ app.use('/api-middleware', proxy('https://api.wedding-planner.pro', {
 
             if (response.groomName === 'Никита') {
                 response.groomName = 'Бейби';
-                console.log('bastard made his job');
             }
 
             const finalResponse = JSON.stringify(response);
@@ -63,7 +62,9 @@ app.use('/api-middleware', proxy('https://api.wedding-planner.pro', {
         }
     },
     proxyReqPathResolver: (req) => {
-        return req.url.replaceAll(req.hostname, 'svdba.ru');
+        return req.url
+            .replaceAll(req.hostname, 'svdba.ru')
+            .replaceAll('бейби-и-анастасия.рф', 'svdba.ru');
     }
 }));
 
@@ -78,11 +79,11 @@ app.use(proxy('https://svdba.ru', {
 
         const responseString = proxyResData.toString('utf8');
 
-        const manualDebugDomains = '"xn-----8kcaaba5a2abed2dzcbo8t.xn--p1ai","бейби-и-анастасия.рф",';
+        const manualRuDomain = '"бейби-и-анастасия.рф",';
 
         return responseString
             .replaceAll('https://api.wedding-planner.pro', `${userReq.headers.origin}/api-middleware`)
-            .replaceAll('"svdba.ru",', `"svdba.ru","${userReq.hostname}",${manualDebugDomains}`);
+            .replaceAll('"svdba.ru",', `"svdba.ru","${userReq.hostname}",${manualRuDomain}`);
     },
 
 }));
