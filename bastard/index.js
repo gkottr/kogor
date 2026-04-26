@@ -43,6 +43,13 @@ const excludedPaths = ['/', '/music.mp3', '/babyficator', '/api-middleware'];
 
 app.use('/api-middleware', proxy('https://api.wedding-planner.pro', {
     userResDecorator: async (proxyRes, proxyResData, userReq, userRes) => {
+        if (
+            userRes.getHeader('content-encoding') !== 'br'
+            || !userReq.path.includes('api/individual-invitations')
+        ) {
+            return proxyResData;
+        }
+
         try {
             const decompressedBuffer = await brotliDecompressPromise(proxyResData);        
             const responseString = decompressedBuffer.toString('utf8');
@@ -65,7 +72,7 @@ app.use('/api-middleware', proxy('https://api.wedding-planner.pro', {
         return req.url
             .replaceAll(req.hostname, 'svdba.ru')
             .replaceAll('бейби-и-анастасия.рф', 'svdba.ru');
-    }
+    },
 }));
 
 app.use(proxy('https://svdba.ru', {
