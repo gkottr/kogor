@@ -69,9 +69,12 @@ app.use('/api-middleware', proxy('https://api.wedding-planner.pro', {
         }
     },
     proxyReqPathResolver: (req) => {
-        return req.url
+        console.log(req.url);
+        const xxx = req.url
             .replaceAll(req.hostname, 'svdba.ru')
             .replaceAll('бейби-и-анастасия.рф', 'svdba.ru');
+
+            console.log(xxx); return xxx;
     },
 }));
 
