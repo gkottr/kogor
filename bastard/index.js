@@ -78,7 +78,7 @@ app.use(proxy('https://svdba.ru', {
 
         const responseString = proxyResData.toString('utf8');
 
-        const manualDebugDomains = '"xn-----8kcaaba5a2abed2dzcbo8t.xn--p1ai","бейби-и-анастасия",';
+        const manualDebugDomains = '"xn-----8kcaaba5a2abed2dzcbo8t.xn--p1ai","бейби-и-анастасия.рф",';
 
         return responseString
             .replaceAll('https://api.wedding-planner.pro', `${userReq.headers.origin}/api-middleware`)
