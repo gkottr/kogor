@@ -3,6 +3,7 @@ import proxy from 'express-http-proxy';
 import { join } from 'node:path';
 import {createServer} from 'node:https';
 import { readFileSync } from 'node:fs';
+import { domainToUnicode } from 'node:url';
 
 import { promisify } from 'node:util';
 import { brotliDecompress } from 'node:zlib';
@@ -87,11 +88,9 @@ app.use(proxy('https://svdba.ru', {
 
         const responseString = proxyResData.toString('utf8');
 
-        const manualRuDomain = '"бейби-и-анастасия.рф",';
-
         return responseString
             .replaceAll('https://api.wedding-planner.pro', `${userReq.headers.origin}/api-middleware`)
-            .replaceAll('"svdba.ru",', `"svdba.ru","${userReq.hostname}",${manualRuDomain}`);
+            .replaceAll('"svdba.ru",', `"svdba.ru","${userReq.hostname}","${domainToUnicode(userReq.hostname)}",`);
     },
 
 }));
