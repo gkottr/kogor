@@ -49,7 +49,7 @@ app.use('/api-middleware', proxy('https://api.wedding-planner.pro', {
             const response = JSON.parse(responseString);
 
             if (response.groomName === 'Никита') {
-                response.groomName = 'Baby';
+                response.groomName = 'Бейби';
                 console.log('bastard made his job');
             }
 
